@@ -1,9 +1,12 @@
+# Woah so DRY! More helpers to keep my API endpoint code clean and free of repeated code.
+# Don't forget to create your own dbcreds.py file!
 import mariadb
 import dbcreds
 import traceback
 
 
 def get_db_connection():
+    # Create our connection to the DB and return it
     try:
         return mariadb.connect(user=dbcreds.user, password=dbcreds.password,
                                host=dbcreds.host, port=dbcreds.port, database=dbcreds.database)
@@ -14,6 +17,7 @@ def get_db_connection():
 
 
 def get_db_cursor(conn):
+    # Get the cursor of the connection we have created
     try:
         return conn.cursor()
     except:
@@ -23,6 +27,7 @@ def get_db_cursor(conn):
 
 
 def close_db_cursor(cursor):
+    # Close the passed in cursor
     if(cursor == None):
         return True
     try:
@@ -35,6 +40,7 @@ def close_db_cursor(cursor):
 
 
 def close_db_connection(conn):
+    # Close the passed in connection
     if(conn == None):
         return True
     try:
